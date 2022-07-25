@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration config
+@inject Microsoft.Extensions.Options.IOptions<SocialLoginSettings> socialLoginOptions
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Send Grid</h1>
+    <p>@ViewBag.SendGridKey</p>
+</div>
+<div class="text-center">
+    <h1 class="display-4">Twilio From Controller</h1>
+    <p>@ViewBag.TwilioAuthToken</p>
+    <p>@ViewBag.TwilioAccountSid</p>
+    <p>@ViewBag.TwilioPhoneNumber</p>
+</div>
+<div class="text-center">
+    <h1 class="display-4">Twilio Injected to View</h1>
+    <p>@config.GetSection("Twilio:AuthToken").Value</p>
+    <p>@config.GetSection("Twilio:AccountSid").Value</p>
+</div>
+<div class="text-center">
+    <h1 class="display-4">BottomLevelSetting</h1>
+    <p>@ViewBag.BottomLevelSetting</p>
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Social Login Settings</h1>
+    <p>@ViewBag.FacebookKey</p>
+    <p>@ViewBag.GoogleKey</p>
+</div>
+<div class="text-center">
+    <h1 class="display-4">Social Login Settings from injection Options straight into the View</h1>
+    <p>@socialLoginOptions.Value.FacebookSettings.Key</p>
+    <p>@socialLoginOptions.Value.GoogleSettings.Key</p>
+</div>
+<div class="text-center">
+    <h1 class="display-4">ConnectionString</h1>
+    <p>@ViewBag.ConnectionString</p>
 </div>

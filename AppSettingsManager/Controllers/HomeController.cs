@@ -41,6 +41,7 @@ namespace AppSettingsManager.Controllers
             //ViewBag.TwilioAuthToken = _configuration.GetSection("Twilio").GetValue<String>("AuthToken");
             //// Another way to get a section of config - notice the colon in the Twilio:AccountSid
             //ViewBag.TwilioAccountSid = _configuration.GetValue<String>("Twilio:AccountSid");
+            // Testing Github
 
             // Using a class for App Settings where it has been "BIND" to an object - see_twilioSettings
             // ViewBag.TwilioPhoneNumber = _twilioSettings.PhoneNumber;

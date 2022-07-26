@@ -3,6 +3,22 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// The block statement below is replicating the default hierarchy of where .NET Core looks for app settings.
+// You could change the order but probably not ever required or recommended.
+builder.Host.ConfigureAppConfiguration((context, appConfiguration) =>
+{
+    appConfiguration.Sources.Clear();
+    appConfiguration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+    appConfiguration.AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+    if (context.HostingEnvironment.IsDevelopment())
+    {
+        appConfiguration.AddUserSecrets<Program>();
+    }
+    appConfiguration.AddEnvironmentVariables();
+    appConfiguration.AddCommandLine(args);
+}
+);
+
 //This technique is used for creating an extension method to provide a class TwilioSettings of AppSettings values
 //builder.Configuration.AddConfiguration<TwilioSettings>(builder.Configuration, "Twilio");
 //Need to figure out why the below line does not work!
